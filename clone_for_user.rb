@@ -7,11 +7,16 @@ require 'github'
 def clone_repos_for user
   data = Net::HTTP.get URI.parse("http://github.com/api/v2/json/repos/show/#{user}")
   repos = JSON.parse(data)['repositories']
-  repos.each do |r|
-    system "gh clone %s/%s" % [ r['owner'], r['name'] ]
+  if repos
+    repos.each do |r|
+      system "gh clone %s/%s" % [ r['owner'], r['name'] ]
+    end
+    "Successfully cloned #{user}'s repositories."
+  else
+    "Either #{user} does not exist or they no repositories."
   end
 end
 
 ARGV.each do |user|
-  clone_repos_for user
+  puts clone_repos_for user
 end
