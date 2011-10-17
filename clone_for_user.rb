@@ -13,7 +13,7 @@ def clone_repos_for user
     end
     "Successfully cloned #{user}'s repositories."
   else
-    "Either #{user} does not exist or they no repositories."
+    "Either #{user} does not exist or they have no repositories."
   end
 end
 
